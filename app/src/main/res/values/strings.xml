@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AChess</string>
+    <string name="action_about">Об авторах</string>
+    <string name="action_exit">Выход</string>
+    <string name="game">Свободная игра</string>
+    <string name="blitz">Блиц игра</string>
+    <string name="exit">Выход</string>
+    <string name="exitMessage">Выход: Вы уверены?</string>
+    <string name="about">Курсовий проект розробили студенти групи 1ПР(с) ХНТУ Нирченко К.С. та Васильченко Д.С.</string>
+
+</resources>
