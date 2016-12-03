@@ -4,11 +4,10 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
-import com.chess.android.achess.GameActivity;
 import com.chess.android.achess.R;
 
 /**
@@ -16,7 +15,7 @@ import com.chess.android.achess.R;
  */
 public class Board extends Activity {
 
-    private GridLayout board;
+    private GridLayout gridLayout;
 
     private LayoutInflater inflater;
 
@@ -26,44 +25,48 @@ public class Board extends Activity {
     };
 
 
-    public Board() {
-        board = (GridLayout) findViewById(R.id.root);
-        for (int i = 0; i < 64; i++) {
-            View item = inflater.inflate(R.layout.board_cell, board, false);
+    public Board(Activity context) {
+        gridLayout = (GridLayout) context.findViewById(R.id.root);
+        inflater = context.getLayoutInflater();
+        int id = 0;
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                View item = inflater.inflate(R.layout.board_cell, gridLayout, false);
+                ImageButton imageButton = (ImageButton) item.findViewById(R.id.btn);
+                imageButton.setId(id);
+                imageButton.setBackgroundColor(((i + j) % 2) == 0 ? colors[0] : colors[1]);
+                System.out.println(id);
+                gridLayout.addView(item);
+                id++;
+            }
+        }
+        placeFigures();
+    }
 
-            ImageButton imageButton = (ImageButton) item.findViewById(R.id.btn);
+    public GridLayout getGridLayout() {
+        return gridLayout;
+    }
 
-            imageButton.setId(i);
-//            item.setBackgroundColor(colors[i % 2]);
-            imageButton.setBackgroundColor((i % 2) != 0 ? colors[0] : colors[1]);
-            board.addView(item);
-
+    private void placeFigures() {
+        for (int i = 8; i < 16; i++) {
+//            gridLayout.findViewById(i);
+            FrameLayout fl = (FrameLayout) gridLayout.getChildAt(i);
+            ImageButton imgBut = (ImageButton) fl.getChildAt(0);
+            imgBut.setImageResource(R.drawable.king);
         }
     }
 
 }
 
-
-    /*void refreshShedule() {
-        linLayout.removeAllViews();
-        for (int pair = 0; pair < 6; pair++) {
-            View item = ltInflater.inflate(R.layout.pair, linLayout, false);
-
-            TextView tvSubj = (TextView) item.findViewById(R.id.tvSubj);
-            tvSubj.setText(pairs[day][pair].subject);
-            TextView tvTchr = (TextView) item.findViewById(R.id.tvTchr);
-            tvTchr.setText(pairs[day][pair].teacher);
-            TextView tvAud = (TextView) item.findViewById(R.id.tvAud);
-            tvAud.setText(pairs[day][pair].aud);
-            TextView tvStart = (TextView) item.findViewById(R.id.tvStart);
-            tvStart.setText(pairs[day][pair].startTime);
-            TextView tvEnd = (TextView) item.findViewById(R.id.tvEnd);
-            tvEnd.setText(pairs[day][pair].endTime);
-
-            item.setId(pair);
-            item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
-            item.setBackgroundColor(colors[pair % 2]);
-            registerForContextMenu(item);
-            linLayout.addView(item);
-        }
+/*
+    public void OnClickDel(View v) {
+        //Вызов getParent() возвращает FrameLayout в который вложена кнопка Del
+        FrameLayout fl=(FrameLayout) v.getParent();
+        //Определяем родительскую группу LinearLayout в которую мы добавляли item
+        LinearLayout ll=(LinearLayout) fl.getParent();
+        //Теперь у нас есть все данные, чтобы определить номер позиции в которой
+        //находится item в родительской группе
+        int index=ll.indexOfChild(fl);
+        //Зная индекс item в группе LinearLayout, можно удалить  элемент
+        ll.removeViewAt(index);
     }*/

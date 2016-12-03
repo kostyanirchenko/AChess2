@@ -24,8 +24,7 @@ public class GameActivity extends Activity {
         Intent intent = getIntent();
         blitzMode = intent.getBooleanExtra("BlitzMode", false);
 
-//        gridLayout = (GridLayout) findViewById(R.id.root);
-
-        Board board = new Board();
+        Board board = new Board(this);
+        this.gridLayout = board.getGridLayout();
     }
 }
