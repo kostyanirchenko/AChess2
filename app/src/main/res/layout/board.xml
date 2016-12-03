@@ -25,8 +25,9 @@
         android:layout_weight="10"
         android:columnCount="8"
         android:rowCount="8"
+        android:id="@+id/root"
         android:orientation="horizontal">
-        <ImageButton
+        <!--<ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageButton" />
@@ -281,7 +282,7 @@
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/imageButton1" />
+            android:id="@+id/imageButton1" />-->
     </GridLayout>
 
     <LinearLayout

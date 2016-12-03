@@ -1,55 +1,69 @@
 package com.chess.android.achess.core;
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.GridLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+
+import com.chess.android.achess.GameActivity;
+import com.chess.android.achess.R;
+
 /**
  * Created by NKostya on 03.12.2016.
  */
-public class Board {
+public class Board extends Activity {
+
+    private GridLayout board;
+
+    private LayoutInflater inflater;
+
+    private int[] colors = {
+            Color.parseColor("#E1D3E6"),
+            Color.parseColor("#504254")
+    };
+
 
     public Board() {
+        board = (GridLayout) findViewById(R.id.root);
+        for (int i = 0; i < 64; i++) {
+            View item = inflater.inflate(R.layout.board_cell, board, false);
 
+            ImageButton imageButton = (ImageButton) item.findViewById(R.id.btn);
+
+            imageButton.setId(i);
+//            item.setBackgroundColor(colors[i % 2]);
+            imageButton.setBackgroundColor((i % 2) != 0 ? colors[0] : colors[1]);
+            board.addView(item);
+
+        }
     }
 
 }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // создание LinearLayout
-        LinearLayout linLayout = new LinearLayout(this);
-        // установим вертикальную ориентацию
-        linLayout.setOrientation(LinearLayout.VERTICAL);
-        // создаем LayoutParams
-        LayoutParams linLayoutParam = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-        // устанавливаем linLayout как корневой элемент экрана
-        setContentView(linLayout, linLayoutParam);
+    /*void refreshShedule() {
+        linLayout.removeAllViews();
+        for (int pair = 0; pair < 6; pair++) {
+            View item = ltInflater.inflate(R.layout.pair, linLayout, false);
 
-        LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            TextView tvSubj = (TextView) item.findViewById(R.id.tvSubj);
+            tvSubj.setText(pairs[day][pair].subject);
+            TextView tvTchr = (TextView) item.findViewById(R.id.tvTchr);
+            tvTchr.setText(pairs[day][pair].teacher);
+            TextView tvAud = (TextView) item.findViewById(R.id.tvAud);
+            tvAud.setText(pairs[day][pair].aud);
+            TextView tvStart = (TextView) item.findViewById(R.id.tvStart);
+            tvStart.setText(pairs[day][pair].startTime);
+            TextView tvEnd = (TextView) item.findViewById(R.id.tvEnd);
+            tvEnd.setText(pairs[day][pair].endTime);
 
-        TextView tv = new TextView(this);
-        tv.setText("TextView");
-        tv.setLayoutParams(lpView);
-        linLayout.addView(tv);
-
-        Button btn = new Button(this);
-        btn.setText("Button");
-        linLayout.addView(btn, lpView);
-
-
-        LinearLayout.LayoutParams leftMarginParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        leftMarginParams.leftMargin = 50;
-
-        Button btn1 = new Button(this);
-        btn1.setText("Button1");
-        linLayout.addView(btn1, leftMarginParams);
-
-
-        LinearLayout.LayoutParams rightGravityParams = new LinearLayout.LayoutParams(
-                LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-        rightGravityParams.gravity = Gravity.RIGHT;
-
-        Button btn2 = new Button(this);
-        btn2.setText("Button2");
-        linLayout.addView(btn2, rightGravityParams);
-    }
+            item.setId(pair);
+            item.getLayoutParams().width = LayoutParams.MATCH_PARENT;
+            item.setBackgroundColor(colors[pair % 2]);
+            registerForContextMenu(item);
+            linLayout.addView(item);
+        }
+    }*/
