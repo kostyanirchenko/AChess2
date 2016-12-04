@@ -6,55 +6,68 @@ package com.chess.android.achess.core;
 public abstract class Figures {
 
     /**
+     * Тег фигуры.
+     */
+    public String tag;
+    /**
      * Позиция фигуры.
      */
-    protected int position;
+    public int position;
 
     /**
-     * Id игрока
+     * Id игрока.
      */
-    protected int player;
+    public int player;
+
+    /**
+     * Удалена ли фигура из поля.
+     */
+    public boolean removed;
 
     /**
      * Метод для передвижения фигуры по шахматной доске.
      * @param position - индекс ячейки
      */
-    protected abstract void move(int position);
+    public abstract void move(int position);
 
     /**
      * Метод для задания начального размещения фигуры.
      * @param position - индекс ячейки
      */
-    protected abstract void setPosition(int position);
+    public abstract void setPosition(int position);
 
 
     /**
      * Метод для получения текущей позиции фигуры на доске.
      * @return boolean
      */
-    protected abstract int getPosition();
+    public abstract int getPosition();
 
     /**
      * Метод для удаления фигуры.
      */
-    protected abstract void remove();
+    public abstract void remove();
 
     /**
      * Метод проверки ячейки. Существует ли фигура в выбранной ячейке.
      * @param position - индекс ячейки
      * @return boolean
      */
-    protected abstract boolean checkCell(int position);
+    public abstract boolean checkCell(int position);
 
     /**
      * Метод для установки игрока (белый, черный).
      * @param player - id игрока (0 - белый, 1 - черный)
      */
-    protected abstract void setPlayer(int player);
+    public abstract void setPlayer(int player);
 
     /**
      * Метод для получения игрока.
      * @return int - id игрока
      */
-    protected abstract int getPlayer();
+    public abstract int getPlayer();
+
+    public abstract void setTag(String tag);
+
+    public abstract String getTag();
 }

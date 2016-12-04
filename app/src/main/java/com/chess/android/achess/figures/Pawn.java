@@ -7,38 +7,67 @@ import com.chess.android.achess.core.Figures;
  */
 public class Pawn extends Figures {
 
+    private boolean firstMove;
+
+//    private String tag = "";
+
+    public Pawn(int position, int player, String tag) {
+        this.position = position;
+        this.player = player;
+        this.tag = tag;
+        firstMove = true;
+    }
+
     @Override
-    protected void move(int position) {
+    public void move(int position) {
         setPosition(position);
     }
 
     @Override
-    protected void setPosition(int position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
     @Override
-    protected int getPosition() {
+    public int getPosition() {
         return position;
     }
 
     @Override
-    protected void remove() {
-
+    public void remove() {
+        this.removed = true;
     }
 
     @Override
-    protected boolean checkCell(int position) {
+    public boolean checkCell(int position) {
         return false;
     }
 
     @Override
-    protected void setPlayer(int player) {
+    public void setPlayer(int player) {
         this.player = player;
     }
 
     @Override
-    protected int getPlayer() {
+    public int getPlayer() {
         return player;
+    }
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
+    }
+
+    @Override
+    public String getTag() {
+        return tag;
+    }
+
+    @Override
+    public void setTag(String tag) {
+        this.tag = tag;
     }
 }
